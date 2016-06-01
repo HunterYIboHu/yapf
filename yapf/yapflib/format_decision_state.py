@@ -134,8 +134,8 @@ class FormatDecisionState(object):
       bracket = current if current.ClosesScope() else previous
       if format_token.Subtype.SUBSCRIPT_BRACKET not in bracket.subtypes:
         if bracket.OpensScope():
-          if (unwrapped_line.IsSurroundedByBrackets(bracket) or
-              not _IsLastScopeInLine(bracket)):
+          if (not _IsLastScopeInLine(bracket) or
+              unwrapped_line.IsSurroundedByBrackets(bracket)):
             last_token = bracket.matching_bracket
           else:
             last_token = _LastTokenInLine(bracket.matching_bracket)

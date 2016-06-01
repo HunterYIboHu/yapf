@@ -269,8 +269,7 @@ def _SpaceRequiredBetween(left, right):
   if lval == '.' or rval == '.':
     # Don't place spaces between dots.
     return False
-  if ((lval == '(' and rval == ')') or
-      (lval == '[' and rval == ']') or
+  if ((lval == '(' and rval == ')') or (lval == '[' and rval == ']') or
       (lval == '{' and rval == '}')):
     # Empty objects shouldn't be separted by spaces.
     return False
@@ -322,8 +321,8 @@ def _MustBreakBefore(prev_token, cur_token):
   if prev_token.is_comment:
     # Must break if the previous token was a comment.
     return True
-  if (IsSurroundedByBrackets(cur_token) and cur_token.is_string and
-      prev_token.is_string):
+  if (cur_token.is_string and prev_token.is_string and
+      IsSurroundedByBrackets(cur_token)):
     # We want consecutive strings to be on separate lines. This is a
     # reasonable assumption, because otherwise they should have written them
     # all on the same line, or with a '+'.
